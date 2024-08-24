@@ -2,10 +2,12 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {HomeComponent} from "./public/pages/home/home.component";
 import {PageNotFoundComponent} from "./public/pages/page-not-found/page-not-found.component";
+import {VendorManagementComponent} from "./vendors/pages/vendor-management/vendor-management.component";
 
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
+  { path: 'vendors', component: VendorManagementComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full'},
   { path: '**', component: PageNotFoundComponent }
 ];

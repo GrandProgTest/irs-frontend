@@ -28,7 +28,8 @@ import { VendorManagementComponent } from './vendors/pages/vendor-management/ven
     HomeComponent,
     PageNotFoundComponent,
     VendorCreateEditDeleteComponent,
-    VendorManagementComponent
+    VendorManagementComponent,
+
   ],
   imports: [
     BrowserModule,
