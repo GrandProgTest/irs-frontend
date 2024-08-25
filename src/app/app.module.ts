@@ -15,12 +15,19 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatSortModule} from "@angular/material/sort";
 import {MatTableModule} from "@angular/material/table";
 import {MatButtonModule} from "@angular/material/button";
+import {MatDialogModule} from "@angular/material/dialog";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatInputModule} from "@angular/material/input";
 import {HttpClientModule} from "@angular/common/http";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { VendorCreateEditDeleteComponent } from './vendors/components/vendor-create-edit-delete/vendor-create-edit-delete.component';
 import { VendorManagementComponent } from './vendors/pages/vendor-management/vendor-management.component';
+import { VendorFormDialogComponent } from './vendors/components/vendor-form-dialog/vendor-form-dialog.component';
+import {
+  ConfirmDeleteDialog} from './vendors/components/confirm-delete-dialog/confirm-delete-dialog.component';
+import { ScrapperDialogComponent } from './vendors/components/scrapper-dialog/scrapper-dialog.component';
+import { EditVendorDialogComponent } from './vendors/components/edit-vendor-dialog/edit-vendor-dialog.component';
+import { MatCheckboxModule} from "@angular/material/checkbox";
 
 @NgModule({
   declarations: [
@@ -29,6 +36,10 @@ import { VendorManagementComponent } from './vendors/pages/vendor-management/ven
     PageNotFoundComponent,
     VendorCreateEditDeleteComponent,
     VendorManagementComponent,
+    VendorFormDialogComponent,
+    ConfirmDeleteDialog,
+    ScrapperDialogComponent,
+    EditVendorDialogComponent
 
   ],
   imports: [
@@ -46,7 +57,9 @@ import { VendorManagementComponent } from './vendors/pages/vendor-management/ven
     MatPaginatorModule,
     MatToolbarModule,
     MatCardModule,
-    MatGridListModule
+    MatGridListModule,
+    MatDialogModule,
+    MatCheckboxModule
   ],
   providers: [
     provideAnimationsAsync()

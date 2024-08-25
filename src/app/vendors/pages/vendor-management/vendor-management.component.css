@@ -1,12 +1,35 @@
 .table-wrapper {
-  width: 1024px;
-  margin: 50px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 80%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 table {
+  table-layout: fixed;
   width: 100%;
 }
 
-tr.editable-row {
-  background-color: lightblue;
+th, td {
+  word-wrap: break-word;
+}
+
+.title {
+  font-weight: bold;
+  color: #3f51b5;
+  text-align: center;
+}
+
+.add-button {
+  display: block;
+  margin: 20px auto;
+  font-size: 16px;
+}
+.vendor-section {
+  margin-bottom: 60px;
 }

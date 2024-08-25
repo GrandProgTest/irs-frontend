@@ -1,0 +1,44 @@
+<!-- <h2>{{ data.editMode ? 'Editar Proveedor' : 'Nuevo Proveedor' }}</h2> -->
+<h2 class="form-title">Añadiendo proveedor</h2>
+<form (submit)="onSubmit()" #vendorForm="ngForm" class="form-column">
+  <mat-form-field>
+    <input matInput placeholder="Razón Social" name="businessName" required [(ngModel)]="data.vendor.businessName" pattern="[a-zA-Z0-9 ]*">
+    <mat-error *ngIf="vendorForm.controls['businessName']?.invalid">Razón Social Inválida</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Nombre Comercial" name="tradeName" required [(ngModel)]="data.vendor.tradeName" pattern="[a-zA-Z0-9 ]*">
+    <mat-error *ngIf="vendorForm.controls['tradeName']?.invalid">Nombre Comercial Inválido</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Identificación Tributaria" name="taxId" required [(ngModel)]="data.vendor.taxId" pattern="\d{11}">
+    <mat-error *ngIf="vendorForm.controls['taxId']?.invalid">La Identificación Tributaria debe tener 11 dígitos</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput type="tel" placeholder="Número Telefónico" name="phoneNumber" required [(ngModel)]="data.vendor.phoneNumber" pattern="^\+?\d{10,15}$">
+    <mat-error *ngIf="vendorForm.controls['phoneNumber']?.invalid">Número Telefónico Inválido</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput type="email" placeholder="Correo Electrónico" name="email" required [(ngModel)]="data.vendor.email">
+    <mat-error *ngIf="vendorForm.controls['email']?.invalid">Correo Electrónico Inválido</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput type="url" placeholder="Sitio Web" name="website" required [(ngModel)]="data.vendor.website" pattern="https?://.+">
+    <mat-error *ngIf="vendorForm.controls['website']?.invalid">URL del Sitio Web Inválida</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Dirección Física" name="address" required [(ngModel)]="data.vendor.address" pattern="[a-zA-Z0-9 ]*">
+    <mat-error *ngIf="vendorForm.controls['address']?.invalid">Dirección Física Inválida</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="País" name="country" required [(ngModel)]="data.vendor.country" pattern="[a-zA-Z ]*">
+    <mat-error *ngIf="vendorForm.controls['country']?.invalid">País Inválido</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput type="number" placeholder="Facturación Anual" name="annualBilling" required [(ngModel)]="data.vendor.annualBilling" pattern="^\d+(\.\d{1,2})?$">
+    <mat-error *ngIf="vendorForm.controls['annualBilling']?.invalid">Facturación Anual Inválida</mat-error>
+  </mat-form-field>
+  <div class="form-actions">
+    <button mat-raised-button color="primary" type="submit" [disabled]="vendorForm.invalid">{{ data.editMode ? 'Actualizar' : 'Añadir Proveedor' }}</button>
+    <button mat-raised-button color="warn" (click)="onCancel()">Cancelar</button>
+  </div>
+</form>

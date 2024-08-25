@@ -1,48 +1,39 @@
 // src/app/vendors/components/vendor-create-edit-delete/vendor-create-edit-delete.component.ts
-import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Vendor } from '../../model/vendor.entity';
-import { NgForm } from '@angular/forms';
+import { VendorFormDialogComponent } from '../vendor-form-dialog/vendor-form-dialog.component';
 
 @Component({
   selector: 'app-vendor-create-edit-delete',
   templateUrl: './vendor-create-edit-delete.component.html',
-  styleUrl: './vendor-create-edit-delete.component.css'
+  styleUrls: ['./vendor-create-edit-delete.component.css']
 })
 export class VendorCreateEditDeleteComponent {
-
-  // Attributes
-  @Input() vendor: Vendor;
+  @Input() vendor: Vendor = {} as Vendor;
   @Input() editMode = false;
-  @Output() vendorAdded = new EventEmitter<Vendor>();
   @Output() vendorUpdated = new EventEmitter<Vendor>();
-  @Output() editCanceled = new EventEmitter();
-  @ViewChild('vendorForm', { static: false }) vendorForm!: NgForm;
+  @Output() vendorAdded = new EventEmitter<Vendor>();
+  @Output() editCanceled = new EventEmitter<void>();
 
-  // Methods
-  constructor() {
-    this.vendor = {} as Vendor;
-  }
+  constructor(public dialog: MatDialog) {}
 
-  onSubmit() {
-    if (this.vendorForm.form.valid) {
-      let emitter = this.editMode ? this.vendorUpdated : this.vendorAdded;
-      emitter.emit(this.vendor);
-      this.resetEditState();
-    } else {
-      console.error('Invalid data in form');
-    }
-  }
+  openDialog(editMode: boolean, vendor: Vendor = {} as Vendor): void {
+    const dialogRef = this.dialog.open(VendorFormDialogComponent, {
+      width: '400px',
+      data: { vendor, editMode }
+    });
 
-  // Event Handlers
-  onCancel() {
-    this.editCanceled.emit();
-    this.resetEditState();
-  }
-
-  // Private methods
-  private resetEditState() {
-    this.vendor = {} as Vendor;
-    this.editMode = false;
-    this.vendorForm.resetForm();
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        if (editMode) {
+          this.vendorUpdated.emit(result);
+        } else {
+          this.vendorAdded.emit(result);
+        }
+      } else {
+        this.editCanceled.emit();
+      }
+    });
   }
 }

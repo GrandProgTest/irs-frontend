@@ -1,0 +1,36 @@
+.form-container {
+  text-align: center;
+  padding: 20px;
+  max-width: 100%;
+  width: 1400px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  word-wrap: break-word;
+}
+
+.checkbox-group {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.button-group {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+table {
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: auto;
+  display: block;
+}
+
+table th, table td {
+  white-space: nowrap;
+}

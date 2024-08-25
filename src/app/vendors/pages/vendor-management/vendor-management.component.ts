@@ -4,43 +4,82 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { VendorsService } from '../../services/vendors.service';
+import { ScrapperService } from '../../services/scrapper.service';
+import { ConfirmDeleteDialog } from '../../components/confirm-delete-dialog/confirm-delete-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import { ScrapperDialogComponent } from '../../components/scrapper-dialog/scrapper-dialog.component';
+import { EditVendorDialogComponent } from '../../components/edit-vendor-dialog/edit-vendor-dialog.component';
 
 @Component({
   selector: 'app-vendor-management',
   templateUrl: './vendor-management.component.html',
-  styleUrl: './vendor-management.component.css'
+  styleUrls: ['./vendor-management.component.css']
 })
 export class VendorManagementComponent implements OnInit, AfterViewInit {
 
-  // Attributes
-
   vendorData: Vendor;
   dataSource!: MatTableDataSource<any>;
-  displayedColumns: string[] = ['id', 'businessName', 'tradeName', 'taxId', 'phoneNumber', 'email', 'website', 'address', 'country', 'annualBilling', 'actions'];
+  displayedColumns: string[] = ['businessName', 'tradeName', 'taxId', 'phoneNumber', 'email', 'website', 'address', 'country', 'annualBilling', 'updatedDate', 'actions'];
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
   isEditMode: boolean;
 
-  // Constructor
-
-  constructor(private vendorService: VendorsService) {
+  constructor(private dialog: MatDialog,
+              private vendorService: VendorsService,
+              private scrapperService: ScrapperService) {
     this.isEditMode = false;
     this.vendorData = {} as Vendor;
     this.dataSource = new MatTableDataSource<any>();
   }
-
-  // Private Methods
 
   private resetEditState(): void {
     this.isEditMode = false;
     this.vendorData = {} as Vendor;
   }
 
-  // UI Event Handlers
+  confirmDelete(element: Vendor): void {
+    const dialogRef = this.dialog.open(ConfirmDeleteDialog, {
+      width: '250px',
+      data: { element }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.onDeleteItem(element);
+      }
+    });
+  }
+
+  onScreening(element: Vendor): void {
+    this.dialog.open(ScrapperDialogComponent, {
+      width: '400px',
+      data: { element }
+    });
+  }
+
+   formatDate(dateString: string): string {
+    const date = new Date(dateString);
+    const formattedDate = `Fecha: ${date.getFullYear()}-${('0' + (date.getMonth() + 1)).slice(-2)}-${('0' + date.getDate()).slice(-2)} // Hora: ${date.toTimeString().split(' ')[0]}`;
+    return formattedDate;
+  }
 
   onEditItem(element: Vendor) {
     this.isEditMode = true;
     this.vendorData = element;
+    const dialogRef = this.dialog.open(EditVendorDialogComponent, {
+      width: '400px',
+      data: { vendor: element }
+    });
+
+    dialogRef.componentInstance.cancelEdit.subscribe(() => {
+      this.onCancelEdit();
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.onVendorUpdated(result);
+      }
+    });
   }
 
   onDeleteItem(element: Vendor) {
@@ -63,8 +102,6 @@ export class VendorManagementComponent implements OnInit, AfterViewInit {
     this.updateVendor();
     this.resetEditState();
   }
-
-  // CRUD Actions
 
   private getAllVendors() {
     this.vendorService.getAll().subscribe(
@@ -91,7 +128,7 @@ export class VendorManagementComponent implements OnInit, AfterViewInit {
         console.error('createVendor error:', error);
       }
     );
-  };
+  }
 
   private updateVendor() {
     let vendorToUpdate = this.vendorData;
@@ -109,7 +146,7 @@ export class VendorManagementComponent implements OnInit, AfterViewInit {
         console.error('updateVendor error:', error);
       }
     );
-  };
+  }
 
   private deleteVendor(vendorId: number) {
     this.vendorService.delete(vendorId).subscribe(
@@ -123,9 +160,8 @@ export class VendorManagementComponent implements OnInit, AfterViewInit {
         console.error('deleteVendor error:', error);
       }
     );
-  };
+  }
 
-  // Angular Lifecycle Hooks
 
   ngOnInit(): void {
     this.getAllVendors();
@@ -134,5 +170,13 @@ export class VendorManagementComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+    this.dataSource.sortingDataAccessor = (item, property) => {
+      switch (property) {
+        case 'updatedDate': return new Date(item.updatedDate);
+        default: return item[property];
+      }
+    };
+    this.dataSource.sort.active = 'updatedDate';
+    this.dataSource.sort.direction = 'desc';
   }
 }

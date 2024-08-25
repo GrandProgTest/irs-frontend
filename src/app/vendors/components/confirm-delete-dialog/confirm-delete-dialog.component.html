@@ -1,0 +1,20 @@
+<div class="form-container">
+  <h1 mat-dialog-title>Confirmar Eliminación</h1>
+  <div mat-dialog-content>
+    <p>¿Está seguro de que desea eliminar este elemento?</p>
+    <p>Razón Social: {{ data.element.businessName }}</p>
+    <p>Nombre Comercial: {{ data.element.tradeName }}</p>
+    <p>Identificación Tributaria: {{ data.element.taxId }}</p>
+    <p>Número Telefónico: {{ data.element.phoneNumber }}</p>
+    <p>Correo Electrónico: {{ data.element.email }}</p>
+    <p>Sitio Web: {{ data.element.website }}</p>
+    <p>Dirección Física: {{ data.element.address }}</p>
+    <p>País: {{ data.element.country }}</p>
+    <p>Facturación Anual: {{ data.element.annualBilling }}</p>
+    <p>Fecha de Última Edición: {{ data.element.updatedDate }}</p>
+  </div>
+  <div class="button-group">
+    <button mat-button (click)="onNoClick()">No</button>
+    <button mat-button [mat-dialog-close]="true">Sí</button>
+  </div>
+</div>
