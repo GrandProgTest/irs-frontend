@@ -1,0 +1,8 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/fc0649ec-536d-4f11-ad1c-c7cc8a1d5b8b/resourceGroups/OpenSource/providers/Microsoft.Web/sites/angular-projectey",
+    "appService.deploySubpath": "dist"
+}
