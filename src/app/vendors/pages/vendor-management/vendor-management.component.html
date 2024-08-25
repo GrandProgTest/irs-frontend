@@ -40,8 +40,8 @@
       <td *matCellDef="let element" mat-cell>{{ element.country }}</td>
     </ng-container>
     <ng-container matColumnDef="annualBilling">
-      <th *matHeaderCellDef mat-header-cell mat-sort-header>Facturación Anual</th>
-      <td *matCellDef="let element" mat-cell>{{ element.annualBilling }}</td>
+      <th *matHeaderCellDef mat-header-cell mat-sort-header>Facturación Anual (Dólares)</th>
+      <td *matCellDef="let element" mat-cell>$ {{ element.annualBilling }}</td>
     </ng-container>
     <ng-container matColumnDef="updatedDate">
       <th *matHeaderCellDef mat-header-cell mat-sort-header>Fecha de Última Edición</th>
@@ -52,7 +52,9 @@
       <td *matCellDef="let element" mat-cell>
         <a (click)="onEditItem(element)" href="javascript:void(0)"><mat-icon>edit</mat-icon></a>
         <a (click)="confirmDelete(element)" href="javascript:void(0)"><mat-icon>delete</mat-icon></a>
-        <a (click)="onScreening(element)" href="javascript:void(0)"><mat-icon>search</mat-icon> Screening</a>
+        <a (click)="onScreening(element)" href="javascript:void(0)" class="screening-button">
+          <mat-icon>search</mat-icon> Screening
+        </a>
       </td>
     </ng-container>
     <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>

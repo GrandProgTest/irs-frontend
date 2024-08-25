@@ -1,4 +1,4 @@
-<!-- <h2>{{ data.editMode ? 'Editar Proveedor' : 'Nuevo Proveedor' }}</h2> -->
+<!-- src/app/vendors/components/vendor-form-dialog/vendor-form-dialog.component.html -->
 <h2 class="form-title">Añadiendo proveedor</h2>
 <form (submit)="onSubmit()" #vendorForm="ngForm" class="form-column">
   <mat-form-field>
@@ -30,7 +30,9 @@
     <mat-error *ngIf="vendorForm.controls['address']?.invalid">Dirección Física Inválida</mat-error>
   </mat-form-field>
   <mat-form-field>
-    <input matInput placeholder="País" name="country" required [(ngModel)]="data.vendor.country" pattern="[a-zA-Z ]*">
+    <mat-select placeholder="País" name="country" required [(ngModel)]="data.vendor.country">
+      <mat-option *ngFor="let country of countries" [value]="country">{{ country }}</mat-option>
+    </mat-select>
     <mat-error *ngIf="vendorForm.controls['country']?.invalid">País Inválido</mat-error>
   </mat-form-field>
   <mat-form-field>

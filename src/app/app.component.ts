@@ -9,5 +9,6 @@ export class AppComponent {
   title = 'IRS Platform';
   options = [
     { path: '/home', title: 'Home'},
+    {path: '/vendors', title: 'Vendors'},
   ]
 }

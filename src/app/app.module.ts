@@ -28,6 +28,9 @@ import {
 import { ScrapperDialogComponent } from './vendors/components/scrapper-dialog/scrapper-dialog.component';
 import { EditVendorDialogComponent } from './vendors/components/edit-vendor-dialog/edit-vendor-dialog.component';
 import { MatCheckboxModule} from "@angular/material/checkbox";
+import { MatSelectModule } from '@angular/material/select';
+import { SignInComponent } from './iam/pages/sign-in/sign-in.component';
+import { AuthenticationSectionComponent } from './iam/components/authentication-section/authentication-section.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +42,9 @@ import { MatCheckboxModule} from "@angular/material/checkbox";
     VendorFormDialogComponent,
     ConfirmDeleteDialog,
     ScrapperDialogComponent,
-    EditVendorDialogComponent
+    EditVendorDialogComponent,
+    SignInComponent,
+    AuthenticationSectionComponent
 
   ],
   imports: [
@@ -59,7 +64,8 @@ import { MatCheckboxModule} from "@angular/material/checkbox";
     MatCardModule,
     MatGridListModule,
     MatDialogModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatSelectModule
   ],
   providers: [
     provideAnimationsAsync()
