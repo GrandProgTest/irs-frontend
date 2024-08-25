@@ -1,3 +1,3 @@
 export const environment = {
-  serverBasePath: 'https://localhost:44363/api/v1'
+  serverBasePath: 'https://chaquitacllaerror404-wa.azurewebsites.net/api/v1'
 };
