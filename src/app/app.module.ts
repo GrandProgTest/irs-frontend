@@ -31,6 +31,7 @@ import { MatCheckboxModule} from "@angular/material/checkbox";
 import { MatSelectModule } from '@angular/material/select';
 import { SignInComponent } from './iam/pages/sign-in/sign-in.component';
 import { AuthenticationSectionComponent } from './iam/components/authentication-section/authentication-section.component';
+import { ResultsDialogComponent } from './vendors/components/results-dialog/results-dialog.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { AuthenticationSectionComponent } from './iam/components/authentication-
     ScrapperDialogComponent,
     EditVendorDialogComponent,
     SignInComponent,
-    AuthenticationSectionComponent
+    AuthenticationSectionComponent,
+    ResultsDialogComponent
 
   ],
   imports: [

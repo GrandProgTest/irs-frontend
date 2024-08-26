@@ -1,3 +1,4 @@
+<!-- src/app/vendors/components/scrapper-dialog/scrapper-dialog.component.html -->
 <div class="form-container">
   <h1>Usted está por hacer "Screening" al siguiente proveedor</h1>
   <p>Razón Social: {{ data.element.businessName }}</p>
@@ -19,74 +20,5 @@
   <div class="button-group">
     <button mat-raised-button (click)="onSearch()" [disabled]="!isSearchEnabled()">Buscar</button>
     <button mat-raised-button color="warn" (click)="onNoClick()">Salir</button>
-  </div>
-  <div *ngIf="worldBankResults.length > 0 || worldBankMoreOpenResults.length > 0">
-    <h2>World Bank Results</h2>
-    <table mat-table [dataSource]="worldBankResults.length > 0 ? worldBankResults : worldBankMoreOpenResults" class="mat-elevation-z8">
-      <ng-container matColumnDef="firmName">
-        <th mat-header-cell *matHeaderCellDef> Firm Name </th>
-        <td mat-cell *matCellDef="let element"> {{element['Firm Name']}} </td>
-      </ng-container>
-      <ng-container matColumnDef="address">
-        <th mat-header-cell *matHeaderCellDef> Address </th>
-        <td mat-cell *matCellDef="let element"> {{element['Address']}} </td>
-      </ng-container>
-      <ng-container matColumnDef="country">
-        <th mat-header-cell *matHeaderCellDef> Country </th>
-        <td mat-cell *matCellDef="let element"> {{element['Country']}} </td>
-      </ng-container>
-      <ng-container matColumnDef="fromDate">
-        <th mat-header-cell *matHeaderCellDef> From Date </th>
-        <td mat-cell *matCellDef="let element"> {{element['From Date']}} </td>
-      </ng-container>
-      <ng-container matColumnDef="toDate">
-        <th mat-header-cell *matHeaderCellDef> To Date </th>
-        <td mat-cell *matCellDef="let element"> {{element['To Date']}} </td>
-      </ng-container>
-      <ng-container matColumnDef="grounds">
-        <th mat-header-cell *matHeaderCellDef> Grounds </th>
-        <td mat-cell *matCellDef="let element"> {{element['Grounds']}} </td>
-      </ng-container>
-      <ng-container matColumnDef="additionalInfo">
-        <th mat-header-cell *matHeaderCellDef> Additional Info </th>
-        <td mat-cell *matCellDef="let element"> {{element['Additional Info']}} </td>
-      </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="['firmName', 'address', 'country', 'fromDate', 'toDate', 'grounds', 'additionalInfo']"></tr>
-      <tr mat-row *matRowDef="let row; columns: ['firmName', 'address', 'country', 'fromDate', 'toDate', 'grounds', 'additionalInfo'];"></tr>
-    </table>
-  </div>
-
-  <div *ngIf="ofacResults.length > 0 || ofacMoreOpenResults.length > 0">
-    <h2>OFAC Results</h2>
-    <table mat-table [dataSource]="ofacResults.length > 0 ? ofacResults : ofacMoreOpenResults" class="mat-elevation-z8">
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef> Name </th>
-        <td mat-cell *matCellDef="let element"> {{element['Name']}} </td>
-      </ng-container>
-      <ng-container matColumnDef="address">
-        <th mat-header-cell *matHeaderCellDef> Address </th>
-        <td mat-cell *matCellDef="let element"> {{element['Address']}} </td>
-      </ng-container>
-      <ng-container matColumnDef="list">
-        <th mat-header-cell *matHeaderCellDef> List </th>
-        <td mat-cell *matCellDef="let element"> {{element['List']}} </td>
-      </ng-container>
-      <ng-container matColumnDef="programs">
-        <th mat-header-cell *matHeaderCellDef> Programs </th>
-        <td mat-cell *matCellDef="let element"> {{element['Programs']}} </td>
-      </ng-container>
-      <ng-container matColumnDef="score">
-        <th mat-header-cell *matHeaderCellDef> Score </th>
-        <td mat-cell *matCellDef="let element"> {{element['Score']}} </td>
-      </ng-container>
-      <ng-container matColumnDef="type">
-        <th mat-header-cell *matHeaderCellDef> Type </th>
-        <td mat-cell *matCellDef="let element"> {{element['Type']}} </td>
-      </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="['name', 'address', 'list', 'programs', 'score', 'type']"></tr>
-      <tr mat-row *matRowDef="let row; columns: ['name', 'address', 'list', 'programs', 'score', 'type'];"></tr>
-    </table>
   </div>
 </div>

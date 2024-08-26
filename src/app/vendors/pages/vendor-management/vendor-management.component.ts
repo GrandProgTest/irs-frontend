@@ -4,7 +4,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { VendorsService } from '../../services/vendors.service';
-import { ScrapperService } from '../../services/scrapper.service';
 import { ConfirmDeleteDialog } from '../../components/confirm-delete-dialog/confirm-delete-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ScrapperDialogComponent } from '../../components/scrapper-dialog/scrapper-dialog.component';
@@ -25,8 +24,7 @@ export class VendorManagementComponent implements OnInit, AfterViewInit {
   isEditMode: boolean;
 
   constructor(private dialog: MatDialog,
-              private vendorService: VendorsService,
-              private scrapperService: ScrapperService) {
+              private vendorService: VendorsService) {
     this.isEditMode = false;
     this.vendorData = {} as Vendor;
     this.dataSource = new MatTableDataSource<any>();
@@ -39,7 +37,7 @@ export class VendorManagementComponent implements OnInit, AfterViewInit {
 
   confirmDelete(element: Vendor): void {
     const dialogRef = this.dialog.open(ConfirmDeleteDialog, {
-      width: '250px',
+      width: '800px',
       data: { element }
     });
 
@@ -52,22 +50,21 @@ export class VendorManagementComponent implements OnInit, AfterViewInit {
 
   onScreening(element: Vendor): void {
     this.dialog.open(ScrapperDialogComponent, {
-      width: '400px',
+      width: '800px',
       data: { element }
     });
   }
 
-   formatDate(dateString: string): string {
+  formatDate(dateString: string): string {
     const date = new Date(dateString);
-    const formattedDate = `Fecha: ${date.getFullYear()}-${('0' + (date.getMonth() + 1)).slice(-2)}-${('0' + date.getDate()).slice(-2)} // Hora: ${date.toTimeString().split(' ')[0]}`;
-    return formattedDate;
+    return `Fecha: ${date.getFullYear()}-${('0' + (date.getMonth() + 1)).slice(-2)}-${('0' + date.getDate()).slice(-2)} // Hora: ${date.toTimeString().split(' ')[0]}`;
   }
 
   onEditItem(element: Vendor) {
     this.isEditMode = true;
     this.vendorData = element;
     const dialogRef = this.dialog.open(EditVendorDialogComponent, {
-      width: '400px',
+      width: '500px',
       data: { vendor: element }
     });
 

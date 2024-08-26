@@ -1,12 +1,9 @@
+// src/app/vendors/components/scrapper-dialog/scrapper-dialog.component.ts
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { ScrapperService } from '../../services/scrapper.service';
-import * as XLSX from 'xlsx';
+import { ResultsDialogComponent } from '../results-dialog/results-dialog.component';
 
-/**
- * Component for the scrapper dialog.
- * Handles the display and search functionality for World Bank and OFAC data.
- */
 @Component({
   selector: 'app-scrapper-dialog',
   templateUrl: './scrapper-dialog.component.html',
@@ -26,7 +23,8 @@ export class ScrapperDialogComponent {
   constructor(
     public dialogRef: MatDialogRef<ScrapperDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private scrapperService: ScrapperService
+    private scrapperService: ScrapperService,
+    private dialog: MatDialog
   ) {}
 
   onNoClick(): void {
@@ -39,36 +37,28 @@ export class ScrapperDialogComponent {
     if (this.worldBankChecked) {
       this.scrapperService.getFirmDataBank(firmName).subscribe(response => {
         this.worldBankResults = response.results;
-        if (this.worldBankResults.length > 5) {
-          this.downloadExcel(this.worldBankResults, 'WorldBankResults');
-        }
+        this.openResultsDialog('World Bank Results', this.worldBankResults, 'worldBank');
       });
     }
 
     if (this.ofacChecked) {
       this.scrapperService.getFirmDataOfac(firmName).subscribe(response => {
         this.ofacResults = response.results;
-        if (this.ofacResults.length > 5) {
-          this.downloadExcel(this.ofacResults, 'OFACResults');
-        }
+        this.openResultsDialog('OFAC Results', this.ofacResults, 'ofac');
       });
     }
 
     if (this.worldBankMoreOpenChecked) {
       this.scrapperService.getFirmDataBankMoreOpen(firmName).subscribe(response => {
         this.worldBankMoreOpenResults = response.results;
-        if (this.worldBankMoreOpenResults.length > 5) {
-          this.downloadExcel(this.worldBankMoreOpenResults, 'WorldBankMoreOpenResults');
-        }
+        this.openResultsDialog('World Bank More Open Results', this.worldBankMoreOpenResults, 'worldBank');
       });
     }
 
     if (this.ofacMoreOpenChecked) {
       this.scrapperService.getFirmDataOfacMoreOpen(firmName).subscribe(response => {
         this.ofacMoreOpenResults = response.results;
-        if (this.ofacMoreOpenResults.length > 5) {
-          this.downloadExcel(this.ofacMoreOpenResults, 'OFACMoreOpenResults');
-        }
+        this.openResultsDialog('OFAC More Open Results', this.ofacMoreOpenResults, 'ofac');
       });
     }
   }
@@ -77,10 +67,10 @@ export class ScrapperDialogComponent {
     return this.worldBankChecked || this.ofacChecked || this.worldBankMoreOpenChecked || this.ofacMoreOpenChecked;
   }
 
-  downloadExcel(data: any[], fileName: string): void {
-    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(data);
-    const wb: XLSX.WorkBook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-    XLSX.writeFile(wb, `${fileName}.xlsx`);
+  openResultsDialog(title: string, results: any[], type: string): void {
+    this.dialog.open(ResultsDialogComponent, {
+      width: 'auto',
+      data: { title, results, type }
+    });
   }
 }

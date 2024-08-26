@@ -27,7 +27,7 @@
       <mat-error *ngIf="vendorForm.controls['website']?.invalid">URL del Sitio Web Inválida</mat-error>
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Dirección Física" name="address" required [(ngModel)]="data.vendor.address" pattern="[a-zA-Z0-9 ]*">
+      <input matInput placeholder="Dirección Física" name="address" required [(ngModel)]="data.vendor.address" pattern="[a-zA-Z0-9\.\,\(\)\-\&\* ]*">
       <mat-error *ngIf="vendorForm.controls['address']?.invalid">Dirección Física Inválida</mat-error>
     </mat-form-field>
     <mat-form-field>
