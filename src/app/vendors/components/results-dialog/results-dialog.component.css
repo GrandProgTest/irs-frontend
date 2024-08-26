@@ -1,0 +1,8 @@
+.table-wrapper {
+  display: table;
+  width: 1200px;
+}
+
+.mat-dialog-container {
+  width: auto;
+}
