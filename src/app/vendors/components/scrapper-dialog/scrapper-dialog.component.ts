@@ -23,6 +23,16 @@ export class ScrapperDialogComponent {
   ofacChecked = false;
 
   /**
+   * Indicates if the World Bank (more open) checkbox is checked.
+   */
+  worldBankMoreOpenChecked = false;
+
+  /**
+   * Indicates if the OFAC (more open) checkbox is checked.
+   */
+  ofacMoreOpenChecked = false;
+
+  /**
    * Stores the results from the World Bank search.
    */
   worldBankResults: any[] = [];
@@ -31,6 +41,16 @@ export class ScrapperDialogComponent {
    * Stores the results from the OFAC search.
    */
   ofacResults: any[] = [];
+
+  /**
+   * Stores the results from the World Bank (more open) search.
+   */
+  worldBankMoreOpenResults: any[] = [];
+
+  /**
+   * Stores the results from the OFAC (more open) search.
+   */
+  ofacMoreOpenResults: any[] = [];
 
   /**
    * Constructor to inject dependencies.
@@ -69,5 +89,25 @@ export class ScrapperDialogComponent {
         this.ofacResults = response.results;
       });
     }
+
+    if (this.worldBankMoreOpenChecked) {
+      this.scrapperService.getFirmDataBankMoreOpen(firmName).subscribe(response => {
+        this.worldBankMoreOpenResults = response.results;
+      });
+    }
+
+    if (this.ofacMoreOpenChecked) {
+      this.scrapperService.getFirmDataOfacMoreOpen(firmName).subscribe(response => {
+        this.ofacMoreOpenResults = response.results;
+      });
+    }
+  }
+
+  /**
+   * Checks if at least one checkbox is selected.
+   * @returns True if at least one checkbox is selected, otherwise false.
+   */
+  isSearchEnabled(): boolean {
+    return this.worldBankChecked || this.ofacChecked || this.worldBankMoreOpenChecked || this.ofacMoreOpenChecked;
   }
 }

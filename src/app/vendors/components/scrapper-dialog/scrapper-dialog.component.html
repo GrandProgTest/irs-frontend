@@ -13,9 +13,11 @@
   <div class="checkbox-group">
     <mat-checkbox [(ngModel)]="worldBankChecked">The World Bank</mat-checkbox>
     <mat-checkbox [(ngModel)]="ofacChecked">OFAC</mat-checkbox>
+    <mat-checkbox [(ngModel)]="worldBankMoreOpenChecked">The World Bank (Revisar por similitud pequeña en el nombre)</mat-checkbox>
+    <mat-checkbox [(ngModel)]="ofacMoreOpenChecked">OFAC (Revisar por similitud pequeña en el nombre)</mat-checkbox>
   </div>
   <div class="button-group">
-    <button mat-raised-button (click)="onSearch()">Buscar</button>
+    <button mat-raised-button (click)="onSearch()" [disabled]="!isSearchEnabled()">Buscar</button>
     <button mat-raised-button color="warn" (click)="onNoClick()">Salir</button>
   </div>
   <div *ngIf="worldBankResults.length > 0">

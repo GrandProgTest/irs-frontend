@@ -21,6 +21,16 @@ export class ScrapperService {
   private apiUrlOfac = 'http://127.0.0.1:5000/search_ofac';
 
   /**
+   * API URL for more open bank data scraping.
+   */
+  private apiUrlBankMoreOpen = 'http://127.0.0.1:5000/search_bank_more_open';
+
+  /**
+   * API URL for more open OFAC data scraping.
+   */
+  private apiUrlOfacMoreOpen = 'http://127.0.0.1:5000/search_ofac_more_open';
+
+  /**
    * Constructor to inject HttpClient.
    * @param http - HttpClient instance to make HTTP requests.
    */
@@ -44,5 +54,25 @@ export class ScrapperService {
   getFirmDataOfac(firmName: string): Observable<any> {
     const params = { firm_name: firmName };
     return this.http.get<any>(this.apiUrlOfac, { params });
+  }
+
+  /**
+   * Fetches firm data from the more open bank data scraping API.
+   * @param firmName - The name of the firm to search for.
+   * @returns An Observable containing the firm data.
+   */
+  getFirmDataBankMoreOpen(firmName: string): Observable<any> {
+    const params = { firm_name: firmName };
+    return this.http.get<any>(this.apiUrlBankMoreOpen, { params });
+  }
+
+  /**
+   * Fetches firm data from the more open OFAC data scraping API.
+   * @param firmName - The name of the firm to search for.
+   * @returns An Observable containing the firm data.
+   */
+  getFirmDataOfacMoreOpen(firmName: string): Observable<any> {
+    const params = { firm_name: firmName };
+    return this.http.get<any>(this.apiUrlOfacMoreOpen, { params });
   }
 }
