@@ -1,4 +1,3 @@
-// src/app/vendors/components/scrapper-dialog/scrapper-dialog.component.ts
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { ScrapperService } from '../../services/scrapper.service';

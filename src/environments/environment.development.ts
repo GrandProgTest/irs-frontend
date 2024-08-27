@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  serverBasePath: 'https://irsapidos-dnbwgyhda0hgabak.eastus-01.azurewebsites.net/api/v1'
+  serverBasePath: 'https://backendirsapi-aaajcth7exbvbrc3.eastus-01.azurewebsites.net/api/v1'
 };

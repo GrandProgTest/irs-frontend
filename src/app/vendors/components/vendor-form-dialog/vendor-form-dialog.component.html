@@ -2,7 +2,7 @@
 <h2 class="form-title">Añadiendo proveedor</h2>
 <form (submit)="onSubmit()" #vendorForm="ngForm" class="form-column">
   <mat-form-field>
-    <input matInput placeholder="Razón Social" name="businessName" required [(ngModel)]="data.vendor.businessName" pattern="[a-zA-Z0-9 ]*">
+    <input matInput placeholder="Razón Social" name="businessName" required [(ngModel)]="data.vendor.businessName" pattern="[a-zA-Z0-9\u4e00-\u9fa5\u3000-\u303F\uFF00-\uFFEF\.,\-\(\)\&\* ]*">
     <mat-error *ngIf="vendorForm.controls['businessName']?.invalid">Razón Social Inválida</mat-error>
   </mat-form-field>
   <mat-form-field>
